@@ -6,23 +6,42 @@
   <Grid>
       <Grid.ColumnDefinitions>
           <ColumnDefinition Width="100" />
+          <ColumnDefinition Width="200"/>
           <ColumnDefinition Width="100"/>
-          <ColumnDefinition Width="100"/>
-          <ColumnDefinition Width="*"/> 
+          <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
       <Grid.RowDefinitions>
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="*" />
           <RowDefinition Height="50" />
-          <RowDefinition Height="*"/>
-          <RowDefinition Height="50"/>
+          <RowDefinition Height="*" />
       </Grid.RowDefinitions>
-      
-    
+
+      <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+          <Border.StrokeShape>
+              <RoundRectangle CornerRadius="5" />
+          </Border.StrokeShape>
+          <Entry x:Name="SearchField" Text=""
+                 Placeholder="Search for student" />
+      </Border>
+      <Button x:Name="SearchButton" Grid.Row="0" Grid.Column="2" Clicked="DoSearchStudent" Text="Search" />
+
+      <Picker x:Name="CoursePicker"
+              Grid.Row="1"
+              Grid.Column="0"
+              Grid.ColumnSpan="3"
+              Margin="5"
+              Title="Select a course"
+              ItemsSource="{Binding}"
+              ItemDisplayBinding="{Binding Coursecode }" />
+
       <CollectionView x:Name="StudentList"
-                      ItemsSource="{Binding}" 
-                      Margin="5" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3"
+                      ItemsSource="{Binding}"
+                      Margin="5" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3"
                       SelectionMode="Single"
                       SelectionChanged="StudentList_SelectionChanged">
-          
+
           <CollectionView.Header>
               <Grid Padding="10">
                   <Grid.ColumnDefinitions>
@@ -34,8 +53,8 @@
                   <Label Grid.Column="1" Text="Id" FontAttributes="Bold"/>
                   <Label Grid.Column="2" Text="Age" FontAttributes="Bold"/>
               </Grid>
-          </CollectionView.Header> 
-          
+          </CollectionView.Header>
+
           <CollectionView.ItemTemplate>
               <DataTemplate>
                   <Grid Padding="10">
@@ -52,19 +71,11 @@
           </CollectionView.ItemTemplate>
       </CollectionView>
 
-      <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
-          <Border.StrokeShape>
-              <RoundRectangle CornerRadius="5" />
-          </Border.StrokeShape>
-          <Entry x:Name="SearchField" Text="" 
-                 Placeholder="Search for student" />
-      </Border>
-      <Button x:Name="SearchButton" Grid.Row="0" Grid.Column="2" Clicked="DoSearchStudent" Text="Search" />
-      <Button Grid.Row="2" Grid.Column="1" Text="Clear student" Grid.ColumnSpan="2"
+      <Button Grid.Row="3" Grid.Column="1" Text="Clear student" Grid.ColumnSpan="2"
               Clicked="DoClearStudent"/>
-      
-      <Grid Grid.Row="1" Grid.Column="3">
-          <Grid.RowDefinitions >
+
+      <Grid Grid.Row="2" Grid.Column="3" Grid.RowSpan="3">
+          <Grid.RowDefinitions>
               <RowDefinition Height="50" />
               <RowDefinition Height="Auto" />
               <RowDefinition Height="Auto"/>
@@ -76,25 +87,22 @@
               <ColumnDefinition Width="300" />
               <ColumnDefinition Width="*" />
           </Grid.ColumnDefinitions>
-          
-          <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Ny Student" 
+
+          <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Ny Student"
                  FontSize="24" FontAttributes="Bold"/>
-          
+
           <Label Grid.Row="1" Grid.Column="0" Text="Id"/>
           <Entry x:Name="IdEntry" Grid.Row="1" Grid.Column="1" />
-          
+
           <Label Grid.Row="2" Grid.Column="0" Text="Name"/>
           <Entry x:Name="NameEntry" Grid.Row="2" Grid.Column="1" />
-          
+
           <Label Grid.Row="3" Grid.Column="0" Text="Age"/>
           <Entry x:Name="AgeEntry" Grid.Row="3" Grid.Column="1" />
-          
+
           <Button x:Name="ChangeStudentButton" Grid.Row="4" Grid.Column="1" Text="Ny student"
                   HorizontalOptions="End"
                   Clicked="OnAddStudent_Clicked"/>
-          
       </Grid>
-      
-      
   </Grid>
 </ContentPage>
