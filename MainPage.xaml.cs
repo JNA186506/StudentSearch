@@ -25,6 +25,7 @@ public partial class MainPage : ContentPage {
         CoursePicker.BindingContext = _courses;
 
         ChangeStudentButton.Clicked += OnAddStudent_Clicked;
+
     }
 
 
@@ -134,11 +135,17 @@ public partial class MainPage : ContentPage {
         student.Studentage = age;
 
         _dx.SaveChanges();
+
+        DisplayAlertAsync("Success", "Student edited", "Ok");
     }
 
     private void DoSearchStudent(object? sender, EventArgs e) {
         StudentList.BindingContext = _students
             .Where(s => s.Studentname.Contains(SearchField.Text, StringComparison.CurrentCultureIgnoreCase))
             .OrderBy(s => s.Studentname);
+    }
+
+    private void ChangeToGradeReports(object? sender, EventArgs e) {
+        Navigation.PushAsync(new ManageCourses(_dx));
     }
 }

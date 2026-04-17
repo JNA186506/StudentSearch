@@ -35,6 +35,7 @@
               Title="Select a course"
               ItemsSource="{Binding}"
               ItemDisplayBinding="{Binding Coursecode }" />
+      
 
       <CollectionView x:Name="StudentList"
                       ItemsSource="{Binding}"
@@ -103,6 +104,9 @@
           <Button x:Name="ChangeStudentButton" Grid.Row="4" Grid.Column="1" Text="Ny student"
                   HorizontalOptions="End"
                   Clicked="OnAddStudent_Clicked"/>
+          <Button Grid.Row="4" Grid.Column="2" 
+                  Clicked="ChangeToGradeReports"
+                  Text="Grade reports"/> 
       </Grid>
   </Grid>
 </ContentPage>

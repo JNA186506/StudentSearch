@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:StudentSearch.models"
+             x:Class="StudentSearch.ManageCourses">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Picker Grid.Row="0" Grid.Column="0" x:Name="GradePicker" SelectedIndexChanged="OnSelectionFilter"/>
+            <Picker Grid.Row="0" Grid.Column="1" x:Name="CoursePicker"
+                    ItemDisplayBinding="{Binding Coursecode}"
+                    SelectedIndexChanged="OnSelectionFilter"/>
+            <CollectionView Grid.Column="0" Grid.Row="1" x:Name="StudentGradeView" Grid.ColumnSpan="2">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Text="{ Binding Name}"/>
+                            <Label Grid.Column="1" Text="{ Binding Course}"/>
+                            <Label Grid.Column="2" Text="{ Binding Grade}"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
