@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="StudentSearch.MainPage">
 
-  <Grid>
+  <Grid HorizontalOptions="Center">
       <Grid.ColumnDefinitions>
           <ColumnDefinition Width="100" />
           <ColumnDefinition Width="200"/>
@@ -72,39 +72,29 @@
           </CollectionView.ItemTemplate>
       </CollectionView>
 
-      <Button Grid.Row="3" Grid.Column="1" Text="Clear student" Grid.ColumnSpan="2"
+      <Button Grid.Row="3" Grid.Column="1" Text="Clear student"
               Clicked="DoClearStudent"/>
 
-      <Grid Grid.Row="2" Grid.Column="3" Grid.RowSpan="3">
+      <Grid Grid.Row="2" Grid.Column="3" Grid.RowSpan="3" Margin="10">
           <Grid.RowDefinitions>
               <RowDefinition Height="50" />
-              <RowDefinition Height="Auto" />
-              <RowDefinition Height="Auto"/>
-              <RowDefinition Height="Auto" />
+              <RowDefinition Height="50" />
+              <RowDefinition Height="50" />
+              <RowDefinition Height="50" />
               <RowDefinition Height="50" />
           </Grid.RowDefinitions>
           <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="Auto" />
+              <ColumnDefinition Width="200" />
               <ColumnDefinition Width="300" />
-              <ColumnDefinition Width="*" />
           </Grid.ColumnDefinitions>
 
-          <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Ny Student"
-                 FontSize="24" FontAttributes="Bold"/>
-
-          <Label Grid.Row="1" Grid.Column="0" Text="Id"/>
-          <Entry x:Name="IdEntry" Grid.Row="1" Grid.Column="1" />
-
-          <Label Grid.Row="2" Grid.Column="0" Text="Name"/>
-          <Entry x:Name="NameEntry" Grid.Row="2" Grid.Column="1" />
-
-          <Label Grid.Row="3" Grid.Column="0" Text="Age"/>
-          <Entry x:Name="AgeEntry" Grid.Row="3" Grid.Column="1" />
-
-          <Button x:Name="ChangeStudentButton" Grid.Row="4" Grid.Column="1" Text="Ny student"
-                  HorizontalOptions="End"
-                  Clicked="OnAddStudent_Clicked"/>
-          <Button Grid.Row="4" Grid.Column="2" 
+          <Button Grid.Row="2" Grid.Column="0" 
+                  Text="Change Student"
+                  Clicked="ChangeToEditStudentPage"/>
+          <Button Grid.Row="3" Grid.Column="0"
+                  Text="New Student"
+                  Clicked="ChangeToNewStudentPage"/>
+          <Button Grid.Row="4" Grid.Column="0" 
                   Clicked="ChangeToGradeReports"
                   Text="Grade reports"/> 
       </Grid>
