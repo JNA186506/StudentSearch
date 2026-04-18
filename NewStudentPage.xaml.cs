@@ -2,6 +2,9 @@
 
 namespace StudentSearch;
 
+/**
+ * This class handles adding students to the program and database.
+ */
 public partial class NewStudentPage : ContentPage {
     private readonly Dat154Context _dx;
 
@@ -17,7 +20,10 @@ public partial class NewStudentPage : ContentPage {
             return;
         }
 
-        if (studentId is < 0 or > 9999) DisplayAlertAsync("Error", "Invalid id entry", "Ok");
+        if (studentId is < 0 or > 99999) {
+            DisplayAlertAsync("Error", "Invalid id entry", "Ok");
+            return;
+        }
 
         var oldStudent = _dx.Students.FirstOrDefault(s => s.Id == studentId);
         if (oldStudent != null) {

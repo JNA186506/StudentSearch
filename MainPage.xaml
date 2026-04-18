@@ -27,21 +27,10 @@
       </Border>
       <Button x:Name="SearchButton" Grid.Row="0" Grid.Column="2" Clicked="DoSearchStudent" Text="Search" />
 
-      <Picker x:Name="CoursePicker"
-              Grid.Row="1"
-              Grid.Column="0"
-              Grid.ColumnSpan="3"
-              Margin="5"
-              Title="Select a course"
-              ItemsSource="{Binding}"
-              ItemDisplayBinding="{Binding Coursecode }" />
-      
-
       <CollectionView x:Name="StudentList"
                       ItemsSource="{Binding}"
                       Margin="5" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3"
-                      SelectionMode="Single"
-                      SelectionChanged="StudentList_SelectionChanged">
+                      SelectionMode="Single">
 
           <CollectionView.Header>
               <Grid Padding="10">
@@ -88,9 +77,15 @@
               <ColumnDefinition Width="300" />
           </Grid.ColumnDefinitions>
 
-          <Button Grid.Row="2" Grid.Column="0" 
+          <Button Grid.Row="0" Grid.Column="0"
+                  Text="Edit student courses"
+                  Clicked="ChangeToEditGradePage" />
+          <Button Grid.Row="1" Grid.Column="0" 
                   Text="Change Student"
                   Clicked="ChangeToEditStudentPage"/>
+          <Button Grid.Row="2" Grid.Column="0"
+                  Text="Delete student"
+                  Clicked="OnDeleteStudent" />
           <Button Grid.Row="3" Grid.Column="0"
                   Text="New Student"
                   Clicked="ChangeToNewStudentPage"/>

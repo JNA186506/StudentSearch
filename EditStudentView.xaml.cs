@@ -3,6 +3,11 @@ using StudentSearch.models;
 
 namespace StudentSearch;
 
+/**
+ * This class allows the user to edit each student found in the list.
+ * The user cannot change the student ID.
+ * Takes Dat154Context and the student to be edited as parameters.
+ */
 public partial class EditStudentView : ContentPage {
     
 
@@ -43,7 +48,4 @@ public partial class EditStudentView : ContentPage {
         Navigation.PopToRootAsync();
     }
     
-    private void OnAddStudent_Clicked(object? sender, EventArgs e) {
-        
-    }
 }

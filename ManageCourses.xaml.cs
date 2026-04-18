@@ -4,6 +4,12 @@ using StudentSearch.models;
 
 namespace StudentSearch;
 
+/**
+ * This class shows a list of all the students with a grade.
+ * It will show all grades less than or equals the one chosen.
+ * It can also filter by course.
+ * Only takes Dat154Context as parameter.
+ */
 public partial class ManageCourses : ContentPage {
     
     private readonly List<string> _possibleGrades = new() { "A", "B", "C", "D", "E", "F"};

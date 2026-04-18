@@ -1,35 +1,27 @@
 ﻿using System.Collections.ObjectModel;
-using System.Text.RegularExpressions;
 using Microsoft.EntityFrameworkCore;
 using StudentSearch.models;
 
 namespace StudentSearch;
 
+/**
+ * This class handles the logic on the main page. You can make a new student.
+ * Edit a student, and delete a student. You can also navigate to pages that give a
+ * grade report for every student, and editing a selected students grades.
+ */
 public partial class MainPage : ContentPage {
-
     private readonly Dat154Context _dx;
     private readonly ObservableCollection<Student> _students;
-    private readonly ObservableCollection<Course> _courses;
-    
+
     public MainPage(Dat154Context dx) {
         InitializeComponent();
-        
+
         _dx = dx;
-        _students = _dx.Students.Local.ToObservableCollection();
-        _courses = _dx.Courses.Local.ToObservableCollection();
-        
         _dx.Students.Load();
-        _dx.Courses.Load();
-        
+        _students = _dx.Students.Local.ToObservableCollection();
+
+
         StudentList.BindingContext = _students.OrderBy(s => s.Studentname);
-        CoursePicker.BindingContext = _courses;
-
-    }
-
-
-    private void StudentList_SelectionChanged(object? sender, SelectionChangedEventArgs e) {
-        var selected = e.CurrentSelection.FirstOrDefault() as Student;
- 
     }
 
     private void DoClearStudent(object? sender, EventArgs e) {
@@ -48,15 +40,36 @@ public partial class MainPage : ContentPage {
 
     private void ChangeToEditStudentPage(object? sender, EventArgs e) {
         var selected = (Student)StudentList.SelectedItem;
-        if (selected == null) {
-            DisplayAlertAsync("Error", "Please select the student you want to change", "OK");
-        }
-        if (selected != null) {
-            Navigation.PushAsync(new EditStudentView(_dx, selected));
-        }
+        if (selected == null) DisplayAlertAsync("Error", "Please select the student you want to change", "OK");
+
+        if (selected != null) Navigation.PushAsync(new EditStudentView(_dx, selected));
     }
 
     private void ChangeToNewStudentPage(object? sender, EventArgs e) {
         Navigation.PushAsync(new NewStudentPage(_dx));
+    }
+
+    private void ChangeToEditGradePage(object? sender, EventArgs e) {
+        var selected = (Student)StudentList.SelectedItem;
+        if (selected == null) DisplayAlertAsync("Error", "Please select a student to edit grades", "OK");
+
+        if (selected != null) Navigation.PushAsync(new EditSubjectView(_dx, selected));
+    }
+
+    private async void OnDeleteStudent(object? sender, EventArgs e) {
+        var selected = StudentList.SelectedItem as Student;
+        if (selected == null) {
+            await DisplayAlertAsync("Error", "Choose a student to delete", "OK");
+            return;
+        }
+
+        var confirm = await DisplayAlertAsync("Confirm", "Do you want to remove the selected student?", "Yes", "No");
+
+        if (!confirm) {
+            return;
+        }
+        _dx.Students.Remove(selected);
+        _dx.SaveChanges();
+      
     }
 }
